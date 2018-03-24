@@ -20,6 +20,10 @@ export default {
       type: Number,
       default: 200
     },
+    displayTime: {
+      type: Number,
+      default: 1500
+    },
     speed: {
       type: Number,
       default: 300
@@ -97,7 +101,10 @@ export default {
       }
     },
     next () {
-      if (!this.canContinue()) return
+      if (!this.canContinue()) {
+        this.speed = 4000
+        return
+      }
 
       if (!this.hasStarted) {
         this.currentWordPos = 0
@@ -146,7 +153,7 @@ export default {
         this.fullEraseTimeout = setTimeout(() => {
           clearTimeout(this.fullEraseTimeout)
           this.reset()
-        }, 300)
+        }, this.displayTime)
       }
     },
     reset () {

@@ -148,8 +148,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-66f0a577!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Typewriter.vue", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-66f0a577!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Typewriter.vue");
+		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-da1840c6!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Typewriter.vue", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-da1840c6!../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Typewriter.vue");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -482,6 +482,10 @@ exports.default = {
       type: Number,
       default: 200
     },
+    displayTime: {
+      type: Number,
+      default: 1500
+    },
     speed: {
       type: Number,
       default: 300
@@ -563,7 +567,10 @@ exports.default = {
     next: function next() {
       var _this = this;
 
-      if (!this.canContinue()) return;
+      if (!this.canContinue()) {
+        this.speed = 4000;
+        return;
+      }
 
       if (!this.hasStarted) {
         this.currentWordPos = 0;
@@ -614,7 +621,7 @@ exports.default = {
         this.fullEraseTimeout = setTimeout(function () {
           clearTimeout(_this2.fullEraseTimeout);
           _this2.reset();
-        }, 300);
+        }, this.displayTime);
       }
     },
     reset: function reset() {
